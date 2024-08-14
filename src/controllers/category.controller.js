@@ -106,4 +106,28 @@ const deleteAcategory = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, category, "Category deleted successfully"));
 });
 
-export { createCategory, getAllCategoy, updateAcategory, deleteAcategory };
+const getSingleCategory = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    throw new ApiError(400, "Id is required");
+  }
+
+  const category = await Category.findById(id);
+
+  if (!category) {
+    throw new ApiError(404, "category with this id not found");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, category, "single Category fetched"));
+});
+
+export {
+  createCategory,
+  getAllCategoy,
+  updateAcategory,
+  deleteAcategory,
+  getSingleCategory,
+};

@@ -3,6 +3,7 @@ import {
   createCategory,
   deleteAcategory,
   getAllCategoy,
+  getSingleCategory,
   updateAcategory,
 } from "../controllers/category.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
@@ -30,5 +31,6 @@ router.route("/all/:id").put(
   updateAcategory
 );
 router.route("/:id").delete(deleteAcategory);
+router.route("/all/:id").get(getSingleCategory);
 
 export default router;
