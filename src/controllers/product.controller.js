@@ -62,4 +62,24 @@ const Allproducts = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, products, "All Products fetched"));
 });
 
-export { AddProduct, Allproducts };
+const getSingleProduct = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    throw new ApiError(400, "Product Id required");
+  }
+
+  const product = await Product.findById(id);
+
+  if (!product) {
+    throw new ApiError(404, "product not found");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, product, "Product with id fetched Successfully")
+    );
+});
+
+export { AddProduct, Allproducts, getSingleProduct };
