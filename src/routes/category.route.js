@@ -20,7 +20,7 @@ router.route("/create").post(
 );
 
 router.route("/all").get(getAllCategoy);
-router.route("/:id").put(
+router.route("/all/:id").put(
   upload.fields([
     {
       name: "thumbnail",
