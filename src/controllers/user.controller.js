@@ -145,4 +145,30 @@ const logoutUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "User logged Out successfully"));
 });
 
-export { registerUser, loginUser, logoutUser };
+const getAllUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({});
+
+  if (!users || users.length === 0) {
+    throw new ApiError(404, "Users not found");
+  }
+
+  res.status(200).json(new ApiResponse(200, users, "all users fetched"));
+});
+
+const singleUser = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    throw new ApiError(400, "Id not exists");
+  }
+
+  const user = await User.findById(id);
+
+  if (!user) {
+    throw new ApiError(404, "user does not exist");
+  }
+
+  res.status(200).json(new ApiResponse(200, user, "user fetched successfully"));
+});
+
+export { registerUser, loginUser, logoutUser, getAllUsers, singleUser };
