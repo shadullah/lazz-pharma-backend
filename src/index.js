@@ -7,6 +7,10 @@ dotenv.config({
   path: "./.env",
 });
 
+app.get("/", (req, res) => {
+  res.send("welcome to lazz pharma backend");
+});
+
 connectDB()
   .then(() => {
     app.listen(process.env.PORT || 8000, () => {
