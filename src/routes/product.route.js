@@ -17,7 +17,7 @@ router.route("/add").post(
   ]),
   AddProduct
 );
-
+// list routes command
 router.route("/list").get(Allproducts);
 router.route("/list/:id").get(getSingleProduct);
 
