@@ -30,10 +30,13 @@ const AddProduct = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Category not found");
   }
 
+  const discountAmount = (price * discount) / 100;
+  const discountedPrice = price - discountAmount;
+
   const createProduct = await Product.create({
     name,
     description,
-    price,
+    price: discountedPrice,
     discount,
     stock,
     productImage: productImage?.url,

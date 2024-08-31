@@ -9,10 +9,10 @@ const orderItemSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  // customer: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "User",
-  // },
+  customer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 export const Cart = mongoose.model("Cart", orderItemSchema);
